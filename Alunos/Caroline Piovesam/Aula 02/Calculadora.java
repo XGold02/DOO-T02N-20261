@@ -28,7 +28,8 @@ public class Calculadora {
 
         totalCompra = quantidade * precoUnidade;
 
-        System.out.println("Valor total a pagar: " + totalCompra + " Reais");
+        System.out.println("Valor total a pagar: R$ %.2f ", totalCompra);
+
         return totalCompra;
     }
 
@@ -52,7 +53,7 @@ public class Calculadora {
             return 0;
         } else {
             double troco = pagamentoCliente - totalCompra;
-            System.out.println("O troco deverá ser de: " + troco + " Reais!");
+            System.out.println("O troco deverá ser de: R$ %.2f ", troco);
             return troco;
         }
     }

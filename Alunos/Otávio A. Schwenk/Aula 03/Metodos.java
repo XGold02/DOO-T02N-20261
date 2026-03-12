@@ -65,7 +65,7 @@ public class Metodos {
         System.out.println("Digite o valor da planta vendida!");
         valorUnit = scan.nextDouble();
         valorTotal = quant * valorUnit;
-        System.out.printf("O valor total da venda foi de R$%.2f\n\n",valorTotal);
+        System.out.printf("O valor total da venda foi de R$%.2f\n",valorTotal);
 
         System.out.println("Venda confirmada?");
         resposta = confirmarAcao();
@@ -73,6 +73,7 @@ public class Metodos {
         if(resposta == 1){
             Planta nova = new Planta(planta, valorUnit, quant, valorTotal);
             registro.add(nova);
+            System.out.println("Registro realizado com sucesso!");
         }else{
             System.out.println("ATENCAO: Venda nao confirmada!");
             System.out.println("Nenhuma nova venda registrada!");
@@ -91,11 +92,11 @@ public class Metodos {
         troco = valorPago - valorTotal;
 
         if(troco == 0){
-            System.out.println("Sem troco!\n");
+            System.out.println("Sem troco!");
         }else if(troco < 0){
-            System.out.printf("ATENCAO: Esta faltando R$%.2f!\n\n",troco*-1);
+            System.out.printf("ATENCAO: Esta faltando R$%.2f!\n",troco*-1);
         }else{
-            System.out.printf("O troco sera de R$%.2f!\n\n",troco);
+            System.out.printf("O troco sera de R$%.2f!\n",troco);
         }
     }
 

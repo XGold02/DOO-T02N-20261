@@ -46,21 +46,22 @@ public class Date {
     public static void BuscarVendaDia(){
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM");
         System.out.println("Digite a data para ver seu total de vendas (dd/mm)");
+
         String data = Main.scan.nextLine().trim();
         LocalDate dataValida = DataValida(data);
+
         if (dataValida != null){
-            valoresDiaEMes.forEach((chave, valor) -> {
-            if (dataValida.equals(chave)){
-                System.out.println("data " + chave.format(formatar) + " | Valor " + valor+"\n");
-            }else{
-                System.out.println("Não tem nada nessa data");
-                System.out.println(dataValida);
-                System.out.println(valoresDiaEMes.keySet());
-                Main.VoltarMenu();
+            Double valor = valoresDiaEMes.get(dataValida);
+
+            if (valor != null){
+                System.out.println("Data "+ dataValida.format(formatar) + " | Valor: " + valor + "\n");
+            }else {
+                System.out.println("Não tem vendas nessa data");
             }
-            
-            });
+        }else{
+            System.out.println("Data inválida\n");
         }
+        
         
         Main.VoltarMenu();
         }

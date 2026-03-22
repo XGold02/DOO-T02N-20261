@@ -13,6 +13,7 @@ public class Main {
             System.out.println("[1] Calcular preço total");
             System.out.println("[2] Calcular troco");
             System.out.println("[3] Consultar vendas");
+            System.out.println("[4] Consultar vendas por data");
             System.out.println("[0] Sair");
 
             System.out.println("Entre com a opção desejada: ");
@@ -32,6 +33,10 @@ public class Main {
                     break;
                 case 3:
                     calc.registrarVendas();
+                    break;
+
+                case 4:
+                    calc.consultarVendasPorData();
                     break;
 
                 default:

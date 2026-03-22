@@ -1,10 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Calculadora {
 
     Scanner sc = new Scanner(System.in);
     ArrayList<String> vendas = new ArrayList<>();
+    Map<LocalDate, Integer> vendasPorData = new HashMap<>();
 
     double totalCompra = 0;
     int quantidade = 0;
@@ -41,9 +46,34 @@ public class Calculadora {
         System.out.printf("Valor total a pagar: R$ %.2f ", totalCompra);
         System.out.println();
 
-        vendas.add("Quantidade vendida: " + quantidade + " | "
-                + String.format("Preço da venda: R$ %.2f ", totalCompra));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate data = null;
+
+        while (true) {
+            System.out.println("Digite a data da venda (dd/MM/yyyy): ");
+            String dataTexto = sc.nextLine();
+
+            try {
+                data = LocalDate.parse(dataTexto, formatter);
+                break;
+            } catch (Exception e) {
+                System.out.println("Data inválida! Tente novamente.");
+            }
+        }
+
+        DateTimeFormatter formatterSaida = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        vendas.add(String.format(
+                "Data: %s | Qtd: %d | Total: R$ %.2f ",
+                data.format(formatterSaida), quantidade, totalCompra));
         System.out.println();
+
+        if (vendasPorData.containsKey(data)) {
+            vendasPorData.put(data, vendasPorData.get(data) + 1);
+        } else {
+            vendasPorData.put(data, 1);
+        }
+        System.out.println("Venda registrada!");
         return totalCompra;
 
     }
@@ -88,7 +118,25 @@ public class Calculadora {
         for (String v : vendas) {
             System.out.println(v);
         }
-        System.out.println();
     }
 
+    public void consultarVendasPorData() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        System.out.println("Digite a data para consulta (dd/MM/yyyy): ");
+        String dataTexto = sc.nextLine();
+
+        try {
+            LocalDate data = LocalDate.parse(dataTexto, formatter);
+
+            if (vendasPorData.containsKey(data)) {
+                System.out.println("Total de vendas nesta data: " + vendasPorData.get(data));
+            } else {
+                System.out.println("Nenhuma venda nesta data.");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Data inválida!");
+        }
+    }
 }

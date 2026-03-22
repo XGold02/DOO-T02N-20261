@@ -11,6 +11,7 @@ Calculadora_Floricultura calculadora = new Calculadora_Floricultura();
    System.out.println(" [1] - Calcular Preço Total");
    System.out.println(" [2] - Calcular Troco    ");
    System.out.println("[3] -Listar vendas  ");
+   System.out.println("[4] Listar por Datas");
  System.out.println("[0] - Sair  ");
 
   System.out.println("Entre com a opcao");
@@ -31,6 +32,10 @@ Calculadora_Floricultura calculadora = new Calculadora_Floricultura();
       case 3:
         calculadora.registrarVendas();
         break;
+        case 4:
+
+            calculadora.consultarDatas();
+            break;
     case 0:
     System.out.println("Saindo...");
     break;

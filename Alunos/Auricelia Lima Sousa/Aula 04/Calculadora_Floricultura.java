@@ -1,10 +1,14 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.formatDateTimeFormatt;
+import java.time.format.DateTimeFormatter;
 
 public class Calculadora_Floricultura{
  Scanner scan = new Scanner (System.in);
  ArrayList <String> lista = new ArrayList<>();
 
+ ArrayList <LocalDate> listaDatas = new ArrayList<>();
 int quantidade = 0;
 double total = 0;
 double DESCONTO = 0.95;
@@ -35,7 +39,24 @@ double preco  = scan.nextDouble();
 
     System.out.printf("Valor tota: %.2f ", total);
 
-lista.add("Quantidade vendida: " + quantidade + " | " +  String.format ("preco da venda:  %.2f ", total));
+    DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    LocalDate data =null;
+    
+    while(true){
+      System.out.println("Digite a data da venda dd/MM/yyyy");
+      String dat = scan.nextLine();
+      try{
+        data = LocalDate.parse(dat,formato);
+        break;
+      } catch(Exception a ){
+        System.out.println("Data invalida ");
+
+      }
+    }
+    listaDatas.add(data);
+
+lista.add(String.format("Data: %s | Quantidad: %d | preco: %.2f ", data.format (formato), quantidade, total));
 
 System.out.println();
 return total;
@@ -65,7 +86,6 @@ return total;
 
 
   }
- 
 
  }
  public void registrarVendas(){
@@ -80,5 +100,33 @@ return total;
  System.out.println();
  }
  
+ public void consultarDatas(){
+  DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+ System.out.println("Digite a data da venda dd/MM/yyyy");
+      String dat = scan.nextLine();
+      try{
+       LocalDate buscardata = LocalDate.parse(dat,formato);
+       
+       int cont = 0;
+       for(LocalDate d: listaDatas){
+        if(d.equals(buscardata)){
+        cont++;
+       }
+      }
+      if(cont>0){
+        System.out.println("Total de vendas: " + cont);
+      }
+     else{
+      System.out.println("Nenhuma venda nessa data");
+     }
+    
+  }
+     catch(Exception a ){
+      System.out.println("Data invalida");
+     }
+     System.out.println();
+ 
+ }
 
 }

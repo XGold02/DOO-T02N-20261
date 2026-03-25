@@ -49,7 +49,8 @@ public void setValorTotal(double valorTotal) {
 public String toString() {
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
-    return "Registro{" + "Quantidade da planta='" + qtd + '\'' + ", Preco=" + preco + '\'' + ", Valor total ganho="+valorTotal +", Data=" + dataVenda.format(formatter) +
+    return "Registro{" + "Quantidade da planta='" + qtd + '\'' + ", Preco=" + preco + '\'' + ", Valor total ganho="+valorTotal +
+		", Data=" + dataVenda.format(formatter) +
             '}';
 }
 }

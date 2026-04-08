@@ -1,4 +1,4 @@
- Paradigmas de Programação: Imperativo vs Declarativo
+    Paradigmas de Programação: Imperativo vs Declarativo
 
 Os paradigmas de programação representam diferentes formas de estruturar e pensar a construção de algoritmos e sistemas. Entre os principais paradigmas estudados, destacam-se o * e o declarativo, cada um com suas características, vantagens e formas distintas de resolver problemas.
 

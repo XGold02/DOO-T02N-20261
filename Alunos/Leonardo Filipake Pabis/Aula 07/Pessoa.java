@@ -1,13 +1,15 @@
 public class Pessoa {
     private String nome;
     private int idade;
+    public Endereco endereco;
 
     public Pessoa(){
 
     }
-    public Pessoa(String nome, int idade){
+    public Pessoa(String nome, int idade, String cidade, String bairro, String rua){
         setNome(nome);
         setIdade(idade);
+        this.endereco = new Endereco(cidade, bairro, rua);
     }
 
     public String getNome() {
@@ -40,4 +42,9 @@ public class Pessoa {
             setIdade(novaIdade);
         }
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
 }

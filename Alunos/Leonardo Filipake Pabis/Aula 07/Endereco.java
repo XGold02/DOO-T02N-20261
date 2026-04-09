@@ -3,6 +3,7 @@ public class Endereco {
     private String cidade;
     private String bairro;
     private String rua;
+    private int numero;
     private String complemento;
 
     public Endereco () {
@@ -75,6 +76,19 @@ public class Endereco {
         }
     }
 
+    public int getNumero() {
+        return numero;
+    }
+    public void setNumero(int numero) {
+        if (numero <= 0){
+            System.out.println("Digite um numero válida:");
+            int n = Main.scan.nextInt();
+            Main.scan.nextLine();
+            setNumero(n);
+        }
+        this.numero = numero;
+    }
+
     public String getComplemento() {
         return complemento;
     }
@@ -90,8 +104,21 @@ public class Endereco {
         }
     }
 
-    public void apresentarLogradouro() {
-        System.out.println("Cidade: " + cidade + " | Bairro: " + bairro + " | Rua: " + rua);
+    public void setNovoEndereco(String cidade, String bairro, String rua) {
+        setCidade(cidade);
+        setBairro(bairro);
+        setRua(rua);
     }
+
+    public void apresentarLogradouro() {
+        System.out.println("Estado: "+ estado + " | Cidade: " + cidade + " | Bairro: " + bairro + " | Rua: " + rua + " | Complemento: " + complemento);
+    }
+
+    @Override //Só as informações básicas
+    public String toString() {
+        return String.format("Cidade: %s | Bairro: %s | Rua: %s\n", cidade, bairro, rua);
+    }
+
+
     
 }

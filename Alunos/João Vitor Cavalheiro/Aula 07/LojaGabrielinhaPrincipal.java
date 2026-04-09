@@ -60,16 +60,16 @@ public class LojaGabrielinhaPrincipal {
 	private static void validarEscolhaL(int escolhaL) {
 		switch (escolhaL) {
 			case 1 ->{ 
-				verificarMatriz();
+				verificarMatriz(escolhaL);
 			}
 			case 2 ->{ 
-				verificarFilial01();
+				verificarFilial01(escolhaL);
 			}
 			default ->System.out.println("Escolha uma opção válida");
 		}
 	}
 
-	private static void verificarFilial01() {
+	private static void verificarFilial01(int escolhaL) {
 		int escolhaF01=1;
 		while (escolhaF01 != 0) { 
 		System.out.println("-----Menu Filial-----");
@@ -79,29 +79,29 @@ public class LojaGabrielinhaPrincipal {
 		System.out.println("[4]-Verificar Gerente");
 		System.out.println("[0]-Sair");
 		escolhaF01=ler.nextInt();
-		validarEscolhaF01(escolhaF01);	
+		validarEscolhaF01(escolhaF01, escolhaL);	
 		}
 	}
 
-	private static void validarEscolhaF01(int escolhaF01) {
+	private static void validarEscolhaF01(int escolhaF01, int escolhaL) {
 		switch (escolhaF01) {
 			
 		case 1 -> {
-			lojas.get(1).apresentarLoja();
+			lojas.get(escolhaL-1).apresentarLoja();
 		}
 		case 2 -> {
-			for (int i=0;i<lojas.get(1).vendedores.size() ;i++) {
-				lojas.get(1).vendedores.get(i).apresentarFuncionario();
+			for (int i=0;i<lojas.get(escolhaL-1).vendedores.size() ;i++) {
+				lojas.get(escolhaL-1).vendedores.get(i).apresentarFuncionario();
 			}
 		}
 		case 3 -> {
-			for (int i=0;i<lojas.get(1).clientes.size() ;i++) {
-				lojas.get(1).clientes.get(i).apresentarCliente();
+			for (int i=0;i<lojas.get(escolhaL-1).clientes.size() ;i++) {
+				lojas.get(escolhaL-1).clientes.get(i).apresentarCliente();
 			}
 		}
 		case 4 -> {
-			for (int i=0;i<lojas.get(1).gerentes.size() ;i++) {
-				lojas.get(1).gerentes.get(i).apresentarFuncionario();
+			for (int i=0;i<lojas.get(escolhaL-1).gerentes.size() ;i++) {
+				lojas.get(escolhaL-1).gerentes.get(i).apresentarFuncionario();
 			}
 		}
 		case 0 -> System.out.println("");
@@ -109,7 +109,7 @@ public class LojaGabrielinhaPrincipal {
 		}
 	}
 
-	private static void verificarMatriz() {
+	private static void verificarMatriz(int escolhaL) {
 		int escolhaM=1;
 		while (escolhaM != 0) { 
 			System.out.println("-----Menu Matriz-----");
@@ -119,32 +119,32 @@ public class LojaGabrielinhaPrincipal {
 			System.out.println("[4]-Verificar Gerente");
 			System.out.println("[0]-Sair");
 			escolhaM=ler.nextInt();
-			validarEscolhaM(escolhaM);
+			validarEscolhaM(escolhaM, escolhaL);
 		}
 	}
 
-	private static void validarEscolhaM(int escolhaM) {
+	private static void validarEscolhaM(int escolhaM, int escolhaL) {
 			switch (escolhaM) {
 			
 		case 1 ->{
-			lojas.get(0).apresentarLoja();
+			lojas.get(escolhaL-1).apresentarLoja();
 			System.out.println("");
 		}
 		case 2 -> {
-			for (int i=0;i<lojas.get(0).vendedores.size() ;i++) {
-				lojas.get(0).vendedores.get(i).apresentarFuncionario();
+			for (int i=0;i<lojas.get(escolhaL-1).vendedores.size() ;i++) {
+				lojas.get(escolhaL-1).vendedores.get(i).apresentarFuncionario();
 				System.out.println("");
 			}
 		}
 		case 3 -> {
-			for (int i=0;i<lojas.get(0).clientes.size() ;i++) {
-				lojas.get(0).clientes.get(i).apresentarCliente();
+			for (int i=0;i<lojas.get(escolhaL-1).clientes.size() ;i++) {
+				lojas.get(escolhaL-1).clientes.get(i).apresentarCliente();
 				System.out.println("");
 			}
 		}
 		case 4 -> {
-			for (int i=0;i<lojas.get(0).gerentes.size() ;i++) {
-				lojas.get(0).gerentes.get(i).apresentarFuncionario();
+			for (int i=0;i<lojas.get(escolhaL-1).gerentes.size() ;i++) {
+				lojas.get(escolhaL-1).gerentes.get(i).apresentarFuncionario();
 			}
 		}
 		case 0 -> System.out.println("");

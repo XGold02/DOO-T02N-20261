@@ -49,40 +49,20 @@ public class Loja {
         }
     }
 
-    public int contarClientes() {
-        return clientes.size();
+    public void contarClientes() {
+        System.out.println("Clientes: ");
+        for(int i = 0; i <clientes.size();i++){
+            System.out.printf(" %d - %s", i+1, clientes.get(i).getNome());
+        } clientes.size();
+        System.out.printf("Total: %d", clientes.size());
     }
 
-    public int contarVendedores() {
-        return vendedores.size();
-    }
-
-    public void apresentarSe() {
-        System.out.printf("Loja: %s\nCNPJ: %s\nEndereço: %s, %s, %s\n",
-        nomeFantasia, cnpj, rua, bairro, cidade);
-    }
-
-    public void mostrarLojaCompleta() {
-        System.out.printf("%s (%s) localizada em %s, %s, %s",
-        nomeFantasia, cnpj, rua, bairro, cidade);
-
-        if (clientes.isEmpty()) {
-            System.out.printf(" - Nenhum cliente cadastrado.\n");
-        } else {
-            System.out.printf(" - Clientes:\n");
-            for (int i = 0; i < clientes.size(); i++) {
-                System.out.printf("  - %s\n", clientes.get(i).getNome());
-            }
-        }
-
-        if (vendedores.isEmpty()) {
-            System.out.printf(" - Nenhum vendedor cadastrado.\n");
-        } else {
-            System.out.printf(" - Vendedores:\n");
-            for (int i = 0; i < vendedores.size(); i++) {
-                System.out.printf("  - %s\n", vendedores.get(i).getNome());
-            }
-        }
+    public void contarVendedores() {
+        System.out.println("Vendedores: ");
+        for(int i = 0; i <vendedores.size();i++){
+            System.out.printf(" %d - %s", i+1, vendedores.get(i).getNome());
+        } 
+        System.out.printf("Total: %d", vendedores.size());
     }
 
     public String getNomeFantasia() {
@@ -143,6 +123,11 @@ public class Loja {
         if(rua != null && !rua.isBlank()) {
             this.rua = rua;
         }
+    }
+
+    public void apresentarSe() {
+        System.out.printf("Loja: %s, CNPJ: %s, Endereço: %s, %s, %s\n",
+        nomeFantasia, cnpj, cidade, bairro, rua);
     }
 
     @Override

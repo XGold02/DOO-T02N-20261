@@ -1,6 +1,7 @@
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Pedido {
     private int id;
@@ -11,17 +12,19 @@ public class Pedido {
     private Vendedor vendedor;
     private Lojas loja;
     public ArrayList<Item> itens = new ArrayList<>();
+    public HashMap<Item, Integer> quantidadeDosItens = new HashMap<>();
 
     public Pedido(){
 
     }
 
-    public Pedido(int id, Clientes cliente, Vendedor vendedor, Lojas loja) {
+    public Pedido(int id, Clientes cliente, Vendedor vendedor, Lojas loja, String dataVencimento) {
         setId(id);
         setCliente(cliente);
         setVendedor(vendedor);
         setLoja(loja);
         setDataCriacao();
+        setDataVencimentoReserva(dataVencimento);
     }
 
     public int getId() {
@@ -133,6 +136,7 @@ public class Pedido {
             System.out.print("Item: "+(i+1)+" | " + itens.get(i).gerarDescicao());
         }
     }
+
 
     public void adicionarItem(Item item) {
         this.itens.add(item);

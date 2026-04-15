@@ -7,6 +7,7 @@ public class Main {
     static int opcao = 1000;
     static ArrayList <Vendas> vendas = new ArrayList<>();
     static double valor_de_venda_total = 0;
+    static ArrayList <Item> itensLoja = new ArrayList<>();
     
     public static void main(String[] args){
         Lojas loja1 = new Lojas("Lojinha", "LOJINHARAZAOSOCIAL", "12345676543211", "Cafelandia", "Bairro nobre", "Rua rapida");
@@ -70,8 +71,10 @@ public class Main {
 
         System.out.println(item1.gerarDescicao());
         System.out.println(item2.gerarDescicao());
+        itensLoja.add(item1);
+        itensLoja.add(item2);
         
-        Pedido pedido5 = ProcessaPedido.processar(5, cliente10, vend2, loja1);
+        Pedido pedido5 = ProcessaPedido.processar(5, cliente10, vend2, loja1, "12/12/2026");
         pedido5.setDataVencimentoReserva("12/12/2026");
         pedido5.adicionarItem(item1);
         pedido5.adicionarItem(item2);
@@ -124,6 +127,70 @@ public class Main {
         }while (opcao != 7);
 
     }
+
+    public static void criarPedido(int id, Clientes cliente, Vendedor vendedor, Lojas loja, String dataVencimento){
+        Pedido pedido = ProcessaPedido.processar(id, cliente, vendedor, loja, dataVencimento);
+        System.out.println("Itens disponíveis:");
+        for (int i = 0; i < itensLoja.size(); i++){
+            System.out.println(itensLoja.get(i).gerarDescicao());
+        }
+        while (true) { 
+            System.out.println("1 - Adicionar item à compra\n2 - Ir para o pagamento");
+            int escolha = scan.nextInt();
+            scan.nextLine();
+            if (escolha == 1){
+                adicionarItemACompra(pedido);
+            }else if (escolha == 2){
+                irPagamento(pedido);
+            }
+        }
+        
+    }
+
+    public static void adicionarItemACompra(Pedido pedido){
+        while (true){
+            System.out.println("Digite o ID do item:");
+            int id = scan.nextInt();
+            scan.nextLine();    
+            for (int i = 0; i<itensLoja.size(); i++){
+                if (id == itensLoja.get(i).getId()){
+                    if (pedido.itens.contains(itensLoja.get(i))){
+                        System.out.println("Digite a quantidade para adicionar:");
+                        int quantidade = scan.nextInt();
+                        scan.nextLine();
+                        pedido.quantidadeDosItens.merge(itensLoja.get(i), quantidade, Integer::sum);
+                        System.out.println("Quantidade adicionada com sucesso");
+                        break;
+                    }else{
+                        pedido.adicionarItem(itensLoja.get(i));
+                        System.out.println("Digite a quantidade para adicionar:");
+                        int quantidade = scan.nextInt();
+                        scan.nextLine();
+                        pedido.quantidadeDosItens.merge(itensLoja.get(i), quantidade, Integer::sum);
+                        System.out.println("Pedido adicionado com sucesso");
+                        break;
+                    }
+                    
+                }else{
+                    System.out.println("Digite um ID válido");
+                }
+            }
+            
+        }
+    }
+
+    public static void irPagamento(Pedido pedido){
+        double totalCompra = 0;
+        for (int i = 0; i < pedido.itens.size(); i++){
+            Item item = pedido.itens.get(i);
+            double valorDoItem = item.getValor(); 
+            int quantidade = pedido.quantidadeDosItens.get(item);
+            totalCompra = totalCompra + (valorDoItem * quantidade);
+        }
+        System.out.println("Total da compra: "+totalCompra);
+        pedido.setDataPagamento();
+    }
+
     public static void CalculoPrecoTotal(){
         Vendas venda = new Vendas();
         System.out.println("Digite a quantidade da planta vendida:");

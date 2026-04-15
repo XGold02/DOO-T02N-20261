@@ -1,8 +1,8 @@
 
 
 public class ProcessaPedido {
-    public static Pedido processar(int id, Clientes cliente, Vendedor vendedor, Lojas loja) {
-        Pedido pedido = new Pedido(id, cliente, vendedor, loja);
+    public static Pedido processar(int id, Clientes cliente, Vendedor vendedor, Lojas loja, String dataVencimento) {
+        Pedido pedido = new Pedido(id, cliente, vendedor, loja, dataVencimento);
         return pedido;
     }
 

@@ -2,7 +2,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Pedido{
+public class Pedido {
     private int id;
     private LocalDate dataCriacao;
     private LocalDate dataPagamento;
@@ -28,7 +28,7 @@ public class Pedido{
         return id;
     }
 
-    public void setId(int id) {
+    public final void setId(int id) {
         if (id > 0) {
             this.id = id;
         } else {
@@ -49,7 +49,7 @@ public class Pedido{
         return dataCriacao;
     }
 
-    public void setDataCriacao() {
+    public final void setDataCriacao() {
         this.dataCriacao = Date.dataAtualDate();
     }
 
@@ -62,23 +62,32 @@ public class Pedido{
     }
 
     public void setDataPagamento() {
-        int escolha=0;
-        do { 
-            System.out.println("1 - Agendar pagamento\n2 - Pagar Agora");
-            escolha = Main.scan.nextInt();
-            Main.scan.nextLine();
-            if (escolha == 1){
-            System.out.println("Para qual data deseja agendar? (dd/mm/aaaa)");
-            String data = Main.scan.nextLine();
-            LocalDate dataCerta = Date.stringToDate(data);
-            this.dataPagamento = dataCerta;
-            }
-            else if (escolha == 2){
-                this.dataPagamento = Date.dataAtualDate();
-            }else {
-                System.out.println("Digite uma opcão válida:");
-            }
-        } while (escolha != 1 || escolha != 2);
+        int escolha = 0;
+        if (dataVencimentoReserva.isAfter(Date.dataAtualDate())){
+            do { 
+                System.out.println("1 - Agendar pagamento\n2 - Pagar Agora");
+                escolha = Main.scan.nextInt();
+                Main.scan.nextLine();
+                if (escolha == 1){
+                    System.out.println("Para qual data deseja agendar? (dd/mm/aaaa)");
+                    String data = Main.scan.nextLine();
+                    LocalDate dataCerta = Date.stringToDate(data);
+                    if (dataCerta.isBefore(dataVencimentoReserva)){
+                        this.dataPagamento = dataCerta;
+                    }else{
+                        System.out.println("Data fora do prazo de validade, tente novamente");
+                    }
+                    
+                }
+                else if (escolha == 2){
+                    this.dataPagamento = Date.dataAtualDate();
+                }else {
+                    System.out.println("Digite uma opcão válida:");
+                }
+            } while (escolha != 1 || escolha != 2);
+        } else {
+            System.out.println("O pedido já está vencido.");
+        }
        
     }
 
@@ -99,7 +108,7 @@ public class Pedido{
         return cliente;
     }
 
-    public void setCliente(Clientes cliente) {
+    public final void setCliente(Clientes cliente) {
         this.cliente = cliente;
     }
 
@@ -107,7 +116,7 @@ public class Pedido{
         return vendedor;
     }
 
-    public void setVendedor(Vendedor vendedor) {
+    public final void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
@@ -115,7 +124,7 @@ public class Pedido{
         return loja;
     }
 
-    public void setLoja(Lojas loja) {
+    public final void setLoja(Lojas loja) {
         this.loja = loja;
     }
 

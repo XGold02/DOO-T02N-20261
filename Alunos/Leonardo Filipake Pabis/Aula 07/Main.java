@@ -72,10 +72,16 @@ public class Main {
         System.out.println(item2.gerarDescicao());
         
         Pedido pedido5 = ProcessaPedido.processar(5, cliente10, vend2, loja1);
+        pedido5.setDataVencimentoReserva("12/12/2026");
         pedido5.adicionarItem(item1);
         pedido5.adicionarItem(item2);
         pedido5.getItens();
         pedido5.gerarDescricaoVenda();
+        System.out.println(pedido5.getDataVencimentoReservaString());
+        ProcessaPedido.pagamentoConfirmado(pedido5);
+        pedido5.setDataVencimentoReserva("14/04/2026");
+        System.out.println(pedido5.getDataVencimentoReservaString());
+        ProcessaPedido.pagamentoConfirmado(pedido5);
 
         menu();
 

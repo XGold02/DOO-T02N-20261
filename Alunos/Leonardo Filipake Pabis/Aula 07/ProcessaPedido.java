@@ -6,7 +6,7 @@ public class ProcessaPedido {
         return pedido;
     }
 
-    private boolean confirmarPagamento(Pedido pedido) {
+    private static boolean confirmarPagamento(Pedido pedido) {
         if (Date.dataAtualDate().isBefore(pedido.getDataVencimentoReservaDate())){
             System.out.println("Pagamento dentro do prazo");
             return true;
@@ -14,5 +14,9 @@ public class ProcessaPedido {
             System.out.println("Pagamento fora do prazo");
             return false;
         }
+    }
+
+    public static boolean pagamentoConfirmado(Pedido pedido){
+        return confirmarPagamento(pedido);
     }
 }

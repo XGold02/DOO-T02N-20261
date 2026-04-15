@@ -20,7 +20,7 @@ public class Vendas {
     public int getQuantidade() {
         return quantidade;
     }
-    public void setQuantidade(int quantidade) {
+    public final void setQuantidade(int quantidade) {
         if (quantidade <= 0){
             System.out.println("Digite uma quantidade válida:");
             int q = scan.nextInt();
@@ -32,7 +32,7 @@ public class Vendas {
     public double getPreco() {
         return preco;
     }
-    public void setPreco(double preco) {
+    public final void setPreco(double preco) {
         if (preco <= 0){
             System.out.println("Digite um preço válido:");
             double p = scan.nextDouble();
@@ -44,7 +44,7 @@ public class Vendas {
     public double getvalorDescontoRecebido() {
         return valorDescontoRecebido;
     }
-    public void setvalorDescontoRecebido(double valorDescontoRecebido) {
+    public final void setvalorDescontoRecebido(double valorDescontoRecebido) {
         this.valorDescontoRecebido = valorDescontoRecebido;
     } 
 

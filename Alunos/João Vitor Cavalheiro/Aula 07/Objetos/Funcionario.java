@@ -3,7 +3,13 @@ public class Funcionario extends Pessoa{
     double[] salarioRecebido = new double[3];
     String loja;
 
-        public Funcionario(String nome, int idade, String cidade, String bairro, String rua, String loja ,double salarioBase, double[] salarioRecebido) {
+    public Funcionario(String nome, 
+        int idade, 
+        String cidade, 
+        String bairro, 
+        String rua, 
+         String loja ,
+        double salarioBase, double[] salarioRecebido) {
         super(nome, idade, cidade, bairro, rua);
         this.loja=loja;
         this.salarioBase=salarioBase;
@@ -43,7 +49,7 @@ public class Funcionario extends Pessoa{
         System.out.println("Com um salário de  base de R$"+getSalarioBase());
         System.out.println("Sua média salárial dos 3 últimos meses é R$"+ calcularSalario());
         System.out.println("Caso atinja a meta de venda ganha uma bonificação de R$"+calcularBonus());
-        System.out.println("=======================a");
+        System.out.println("=======================");
     }
 
     public double calcularSalario(){

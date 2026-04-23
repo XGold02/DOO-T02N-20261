@@ -42,7 +42,7 @@ public class Demo {
         locacao2.devolvido = false;
         locadora.adicionarLocacao(locacao2);
 
-        System.out.println("Demo realizadacom sucesso!");
-        System.out.println("Pressione a opção de locações pendentes para verificar as locações criadas.");
+        System.out.println("\n=== LOCAÇÕES ATIVAS ===");
+        locadora.listarPendentes();
     }
 }

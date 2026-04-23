@@ -12,6 +12,7 @@ public class Vendas {
     }   
     public void mostrarVenda(){ 
         System.out.println( "");
+        System.out.println("-------------------");
         System.err.println("=== Detalhes da Venda ===");
         System.out.println("Quantidade: " + quantidade);
         System.out.println("Valor Total: " + valorTotal);

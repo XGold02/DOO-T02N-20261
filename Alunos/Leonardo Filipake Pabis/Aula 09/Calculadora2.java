@@ -55,9 +55,14 @@ public class Calculadora2 {
         botoes.add(clear);
 
         JPanel vazio = new JPanel();
-        vazio.setPreferredSize(new Dimension(165, 50));
+        vazio.setPreferredSize(new Dimension(77, 50));
         vazio.setBackground(Color.lightGray);
         botoes.add(vazio);
+
+        JButton apagar = new JButton();
+        apagar.setPreferredSize(new Dimension(77, 50));
+        apagar.setText("<-");
+        botoes.add(apagar);
 
         JButton divisao = new JButton();
         divisao.setPreferredSize(new Dimension(77, 50));
@@ -134,10 +139,10 @@ public class Calculadora2 {
         zero.setText("0");
         botoes.add(zero);
 
-        JPanel vazio2 = new JPanel();
-        vazio2.setPreferredSize(new Dimension(77, 50));
-        vazio2.setBackground(Color.lightGray);
-        botoes.add(vazio2);
+        JButton ponto = new JButton();
+        ponto.setPreferredSize(new Dimension(77, 50));
+        ponto.setText(".");
+        botoes.add(ponto);
 
         JButton igual = new JButton();
         igual.setPreferredSize(new Dimension(77, 50));
@@ -424,6 +429,28 @@ public class Calculadora2 {
                 }
             }
         });
-    
+        
+        apagar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String texto = resultadoField.getText();
+                if (texto.length() > 0){
+                    resultadoField.setText(texto.substring(0, texto.length()-1));
+                }
+                if (resultadoField.getText().equals("")){
+                    resultadoField.setText("0");
+                    novoNumero = true;
+                }
+            }
+        });
+
+        ponto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!resultadoField.getText().contains(".")){
+                    resultadoField.setText(resultadoField.getText()+".");
+                }
+            }
+        });
     }
 }

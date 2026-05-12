@@ -17,9 +17,10 @@ public class Calculadora2 {
         }
 
     public static double resultado = 0;
-    public static String inputAtual = null;
     public static boolean novoNumero = true;
     public static String operacao = null;
+    public static String historicoTexto = "";
+    public static boolean equalPressed = false;
     public static void main(String[] args) {
         
 
@@ -32,17 +33,32 @@ public class Calculadora2 {
         JPanel resultadoPanel = new JPanel();
         resultadoPanel.setBounds(100, 25, 200, 50);
         resultadoPanel.setBackground(Color.lightGray);
+        resultadoPanel.setBorder(new LineBorder(Color.BLACK, 2));
+
+        JPanel historicoPanel = new JPanel();
+        historicoPanel.setBounds(100, 0, 200, 25);
+        historicoPanel.setBackground(Color.LIGHT_GRAY);
         
 
         JTextField resultadoField = new JTextField();
         resultadoField.setPreferredSize(new Dimension(175, 40));
         resultadoField.setBackground(Color.lightGray);
         resultadoField.setText(Double.toString(resultado));
-        resultadoField.setBorder(new LineBorder(Color.black,2));
+        resultadoField.setBorder(null);
         resultadoField.setEditable(false);
         resultadoField.setHorizontalAlignment(JTextField.CENTER);
     
+        
+
+        JTextField historico = new JTextField();
+        historico.setPreferredSize(new Dimension(175, 20));
+        historico.setBackground(Color.LIGHT_GRAY);
+        historico.setBorder(null);
+        historico.setEditable(false);
+        historico.setHorizontalAlignment(JTextField.RIGHT);
+
         resultadoPanel.add(resultadoField);
+        historicoPanel.add(historico);
 
         JPanel botoes = new JPanel();
         botoes.setBounds(12, 100, 360, 450);
@@ -150,6 +166,7 @@ public class Calculadora2 {
         botoes.add(igual);
 
         frame.add(resultadoPanel);
+        frame.add(historicoPanel);
         frame.add(botoes);
         frame.setVisible(true);
 
@@ -162,6 +179,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '1');
                 }
+                historico.setText(historico.getText()+"1");
             }
         });
 
@@ -174,6 +192,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '2');
                 }
+                historico.setText(historico.getText()+"2");
             }
         });
 
@@ -186,6 +205,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '3');
                 }
+                historico.setText(historico.getText()+"3");
             }
         });
 
@@ -198,6 +218,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '4');
                 }
+                historico.setText(historico.getText()+"4");
             }
         });
 
@@ -210,6 +231,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '5');
                 }
+                historico.setText(historico.getText()+"5");
             }
         });
 
@@ -222,6 +244,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '6');
                 }
+                historico.setText(historico.getText()+"6");
             }
         });
 
@@ -234,6 +257,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '7');
                 }
+                historico.setText(historico.getText()+"7");
             }
         });
 
@@ -246,6 +270,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '8');
                 }
+                historico.setText(historico.getText()+"8");
             }
         });
 
@@ -258,6 +283,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '9');
                 }
+                historico.setText(historico.getText()+"9");
             }
         });
 
@@ -270,6 +296,7 @@ public class Calculadora2 {
                 }else{
                 resultadoField.setText(resultadoField.getText() + '0');
                 }
+                historico.setText(historico.getText()+"0");
             }
         });
 
@@ -293,6 +320,7 @@ public class Calculadora2 {
                         }
                         operacao = "+";
                         resultadoField.setText(Double.toString(resultado));
+                        historico.setText(historico.getText()+"+");
                         novoNumero = true;
                 } catch (NumberFormatException ex) {
                     resultadoField.setText("Error");
@@ -320,6 +348,7 @@ public class Calculadora2 {
                         }
                         operacao = "-";
                         resultadoField.setText(Double.toString(resultado));
+                        historico.setText(historico.getText()+"-");
                         novoNumero = true;
                 } catch (NumberFormatException ex) {
                     resultadoField.setText("Error");
@@ -347,6 +376,7 @@ public class Calculadora2 {
                         }
                         operacao = "*";
                         resultadoField.setText(Double.toString(resultado));
+                        historico.setText(historico.getText()+"*");
                         novoNumero = true;
                 } catch (NumberFormatException ex) {
                     resultadoField.setText("Error");
@@ -374,6 +404,7 @@ public class Calculadora2 {
                         }
                         operacao = "/";
                         resultadoField.setText(Double.toString(resultado));
+                        historico.setText(historico.getText()+"/");
                         novoNumero = true;
                 } catch (NumberFormatException ex) {
                     resultadoField.setText("Error");
@@ -403,9 +434,11 @@ public class Calculadora2 {
                         throw new CalculadoraException("Não pode six-seven >:(");
                     }
                     resultadoField.setText(Double.toString(resultado));
-
+                    historico.setText(historico.getText()+"=");
+                    historico.setText(historico.getText()+resultado+"||");
                     operacao = null;
                     novoNumero = true;
+                    equalPressed = true;
                 } catch (CalculadoraException ex) {
                     resultadoField.setText(ex.getMessage());
                 }catch (NumberFormatException ex){
@@ -434,10 +467,23 @@ public class Calculadora2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String texto = resultadoField.getText();
-                if (texto.length() > 0){
+                if (texto.length() > 1){
                     resultadoField.setText(texto.substring(0, texto.length()-1));
+                    if (!equalPressed){
+                    historico.setText(historico.getText().substring(0, historico.getText().length()-1));
+                    }
+                }else if (resultadoField.getText().length() == 1){
+                    if (resultadoField.getText().equals("0")){
+                        novoNumero = true;
+                    }else {
+                    resultadoField.setText("0");
+                    if (!equalPressed){
+                    historico.setText(historico.getText().substring(0, historico.getText().length()-1));
+                    }
+                    novoNumero = true;
+                    }
                 }
-                if (resultadoField.getText().equals("")){
+                else if (resultadoField.getText().equals("")){
                     resultadoField.setText("0");
                     novoNumero = true;
                 }

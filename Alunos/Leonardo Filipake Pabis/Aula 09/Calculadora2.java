@@ -43,7 +43,7 @@ public class Calculadora2 {
         JTextField resultadoField = new JTextField();
         resultadoField.setPreferredSize(new Dimension(175, 40));
         resultadoField.setBackground(Color.lightGray);
-        resultadoField.setText(Double.toString(resultado));
+        resultadoField.setText("0");
         resultadoField.setBorder(null);
         resultadoField.setEditable(false);
         resultadoField.setHorizontalAlignment(JTextField.CENTER);
@@ -431,11 +431,11 @@ public class Calculadora2 {
                         resultado /= valorAtual;
                     }
                     if (resultado == 67){
-                        throw new CalculadoraException("Não pode six-seven >:(");
+                        throw new CalculadoraException("Não pode resultado six-seven >:(");
                     }
                     resultadoField.setText(Double.toString(resultado));
                     historico.setText(historico.getText()+"=");
-                    historico.setText(historico.getText()+resultado+"||");
+                    historico.setText(historico.getText()+resultado+" || ");
                     operacao = null;
                     novoNumero = true;
                     equalPressed = true;
@@ -456,7 +456,9 @@ public class Calculadora2 {
                     resultado = 0;
                     operacao = null;
                     novoNumero = true;
-                    resultadoField.setText(Double.toString(resultado));
+                    historico.setText("");
+                    resultadoField.setText("0");
+                    equalPressed = false;
                 } catch (NumberFormatException ex) {
                     resultadoField.setText("Error");
                 }
@@ -470,16 +472,17 @@ public class Calculadora2 {
                 if (texto.length() > 1){
                     resultadoField.setText(texto.substring(0, texto.length()-1));
                     if (!equalPressed){
-                    historico.setText(historico.getText().substring(0, historico.getText().length()-1));
+                        historico.setText(historico.getText().substring(0, historico.getText().length()-1));
                     }
                 }else if (resultadoField.getText().length() == 1){
                     if (resultadoField.getText().equals("0")){
                         novoNumero = true;
                     }else {
                     resultadoField.setText("0");
-                    if (!equalPressed){
                     historico.setText(historico.getText().substring(0, historico.getText().length()-1));
-                    }
+                        if (!equalPressed){
+                        historico.setText(historico.getText().substring(0, historico.getText().length()-1));
+                        }
                     novoNumero = true;
                     }
                 }
@@ -495,7 +498,9 @@ public class Calculadora2 {
             public void actionPerformed(ActionEvent e) {
                 if (!resultadoField.getText().contains(".")){
                     resultadoField.setText(resultadoField.getText()+".");
+                    historico.setText(historico.getText()+".");
                 }
+                
             }
         });
     }

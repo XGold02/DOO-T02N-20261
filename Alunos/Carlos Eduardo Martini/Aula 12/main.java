@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
         //ATV1
@@ -30,5 +30,41 @@ public class main {
                                  .collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 
         System.out.println("ATV3: " + contagemPalavras);
+
+        //ATV4 
+        List<Produto> produto = Arrays.asList(
+            new Produto("Mouse Simples", 45.00),
+            new Produto("Teclado Mecânico", 250.00),
+            new Produto("Monitor 24 polegadas", 800.00),
+            new Produto("Mousepad", 30.00d)
+        );
+        List<Produto> prodCaros = produto.stream()
+                .filter(p -> p.getPreco() > 100.00)
+                .collect(Collectors.toList());
+
+        System.out.println("ATV4: " + prodCaros);
+        
+    }
+}
+
+class Produto {
+    private String nome;
+    private double preco;
+
+    public Produto(String nome, double preco){
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public double getPreco(){
+        return preco;
+    }
+    
+    public String toString(){
+        return nome + "(R$ " + preco + ")";
     }
 }

@@ -1,8 +1,3 @@
-**Nome:
-Conceito escolhido:
-Timestamp do vídeo que menciona o conceito:
-O que é? Pra que serve? Como é normalmente utilizado? Exemplo de código.**
-
 # João Vitor Cavalheiro
 
 ## Elvis Operators

@@ -10,7 +10,7 @@ Coroutines e Sealed Classes
 
 ## Timestamp do vídeo que menciona o conceito:
 
-Coroutine: 01:58 - 02:07 (trecho "Parallel programming made intuitive with coroutines")
+03:16 - 03:21 (trecho "Parallel programming made intuitive with coroutines")
 
 ## O que é?
 
@@ -41,13 +41,11 @@ fun main() = runBlocking {
 
 Neste exemplo, a Coroutine criada com `launch` executa uma tarefa paralelamente ao fluxo principal do programa.
 
-
 * # Sealed Classes:
-
 
 ## Timestamp do vídeo que menciona o conceito:
 
-01:18 - 01:21 (trecho "controlled inheritance with sealed class")
+01:47 - 01:52 (trecho "controlled inheritance with sealed class")
 
 ## O que é?
 

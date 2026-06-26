@@ -1,0 +1,99 @@
+Conceito 1: Null Safety (e Elvis Operator)
+
+Timestamp do vídeo que menciona o conceito: 00:45
+
+        O que é?
+
+    Null Safety é um conjunto de recursos da linguagem Kotlin que existe para evitar,
+já durante a compilação do programa, o famoso erro de tentar usar uma variável que
+não aponta para nada (null). Em Kotlin, todo tipo é, por padrão, não-nulo (não pode
+receber null); se você quiser que uma variável possa ser nula, precisa declarar isso
+explicitamente colocando um ? depois do tipo (por exemplo, String?). O Elvis operator (?:)
+é um operador que funciona como um atalho: ele diz "se isso for nulo, use este outro valor no lugar".
+
+        Pra que serve?
+
+    Em Java (e em muitas outras linguagens), é extremamente comum o programa quebrar em
+produção por causa de uma NullPointerException — alguém esqueceu de verificar se uma
+variável era nula antes de usá-la. O Kotlin foi desenhado para resolver exatamente
+esse problema na raiz: como o compilador já sabe quais variáveis podem ou não ser nulas,
+ele obriga o programador a tratar esses casos antes mesmo do programa rodar, evitando
+que esse tipo de erro apareça de surpresa depois.
+
+        Como é normalmente utilizado?
+
+    Quando uma variável é declarada como nula (com ?), o Kotlin não permite
+que você chame métodos ou acesse propriedades dela diretamente — você
+precisa primeiro verificar se ela não é nula, usar o operador ?. (chamada
+segura, que só executa se não for nulo) ou usar o Elvis operator ?: para
+fornecer um valor padrão caso seja nulo.
+
+Exemplo de código
+
+kotlinfun main() {
+    val nome: String? = null // variável que pode ser nula
+
+    // chamada seguraTOR (?.): só executa se "nome" não for nulo
+    println(nome?.length) // imprime "null", sem quebrar o programa
+
+    // Elvis operator (?:): usa um valor padrão se "nome" for nulo
+    val tamanho = nome?.length ?: 0
+    println("Tamanho: $tamanho") // Tamanho: 0
+
+    val saudacao = nome ?: "visitante"
+    println("Olá, $saudacao!") // Olá, visitante!
+}
+
+
+Conceito 2: Corrotinas (suspend, launch, runBlocking)
+
+    Timestamp do vídeo que menciona o conceito: 03:16
+
+        O que é?
+
+    Corrotinas são a forma como o Kotlin lida com tarefas que demoram
+para terminar (como buscar dados na internet, ler um arquivo grande
+ou esperar um tempo) sem travar o restante do programa. Uma corrotina
+é como uma "tarefa pausável": ela pode ser interrompida em um ponto e
+retomada depois, sem bloquear a thread principal que está rodando o
+resto da aplicação.
+
+Pra que serve?
+
+    Sem corrotinas, se você quiser fazer várias tarefas demoradas "ao mesmo
+tempo", normalmente precisaria criar e gerenciar threads manualmente, o
+que é complicado e cheio de armadilhas (como condições de corrida e uso
+excessivo de memória). As corrotinas servem para tornar a programação
+concorrente/paralela muito mais simples e legível, parecendo até um código
+sequencial normal, mesmo executando tarefas de forma assíncrona por trás dos panos.
+
+Como é normalmente utilizado?
+
+
+    runBlocking cria um bloco que "trava" a thread principal até que todas as
+corrotinas dentro dele terminem — geralmente usado em testes ou no main()
+para poder usar corrotinas.
+
+    launch inicia uma nova corrotina que roda de forma independente (não bloqueia quem chamou).
+A palavra-chave suspend é usada para marcar uma função que pode ser pausada
+e retomada depois — ela só pode ser chamada de dentro de outra corrotina ou função suspend.
+
+
+Exemplo de código
+
+kotlinimport kotlinx.coroutines.*
+
+suspend fun buscarDadosDaApi(): String {
+    delay(1000) // simula uma espera de 1 segundo (ex: chamada de rede)
+    return "Dados recebidos!"
+}
+
+fun main() = runBlocking {
+    println("Começando a buscar dados...")
+
+    launch {
+        val resultado = buscarDadosDaApi()
+        println(resultado)
+    }
+
+    println("Essa linha aparece antes do resultado, porque o launch não bloqueia
